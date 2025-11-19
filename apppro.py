@@ -3,6 +3,9 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 
+# Page config MUST be here and only once
+st.set_page_config(page_title="Deepfake Detector", layout="centered")
+
 # --------------------------------------------------
 # Load trained model
 # --------------------------------------------------
@@ -29,7 +32,6 @@ def preprocess_image(image):
 # --------------------------------------------------
 # UI Design 
 # --------------------------------------------------
-st.set_page_config(page_title="Deepfake Detector", layout="centered")
 st.title("🧠 AI Deepfake Image Detector")
 st.write("Upload an image to check whether it is **REAL** or **FAKE** using Vision Transformer/CNN model.")
 
@@ -41,7 +43,6 @@ uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
 
-   # FIXED WARNING ✔
     st.image(image, caption="Uploaded Image", use_container_width=True)
 
     if st.button("Analyze Image"):
@@ -59,9 +60,9 @@ if uploaded_file is not None:
         # --------------------------------------------------
         st.subheader("🔍 Prediction Result")
         if label == "FAKE":
-            st.error(f"⚠️ The model predicts: **FAKE** image")
+            st.error("⚠️ The model predicts: **FAKE** image")
         else:
-            st.success(f"✅ The model predicts: **REAL** image")
+            st.success("✅ The model predicts: **REAL** image")
 
         st.subheader("📊 Confidence")
         st.progress(float(confidence))
